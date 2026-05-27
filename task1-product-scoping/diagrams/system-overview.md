@@ -9,7 +9,7 @@ The diagrams were drafted using Excalidraw for quick system visualisation.
 
 ## Scheduled system flow
 
-![Scheduled System Flow](./images/system-flow.png)
+![Scheduled System Flow](./images/system-overview.png)
 
 The scheduled workflow starts with the scheduler triggering parallel API fetches
 across marketing channels. The processing layer normalises the responses, calculates
@@ -20,7 +20,7 @@ delivery surfaces are refreshed.
 
 ## Failure handling flow
 
-![Failure Handling Flow](./images/failure-flow.png)
+![Failure Handling Flow](./images/failure-handling.png)
 
 If a channel fetch fails, the system retries automatically before marking the
 channel as stale for that run. Rather than failing the entire workflow silently,
