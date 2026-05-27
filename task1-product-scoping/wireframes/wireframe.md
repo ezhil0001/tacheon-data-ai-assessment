@@ -8,61 +8,81 @@ drafting before being refined into the final operational layouts shown below.
 
 ---
 
-## State 1 — Normal run, no anomalies
+## State 1 — Cross-channel performance review
 
-Everything ran cleanly. All channels fresh. No flags. The analyst reads the
-summary bar and moves on. This is the expected daily experience.
+The dashboard surfaces weekly performance movement across paid, organic, and
+CRM channels in a single operational view. Analysts can quickly compare spend,
+conversion efficiency, freshness state, and pipeline movement without drilling
+into separate tools.
 
-![State 1 - Normal run, no anomalies](./state-1-normal.png)
-
----
-
-## State 2 — Anomaly detected
-
-Something moved significantly. The anomaly strip surfaces above the channel
-breakdown so the analyst sees the signal before reading individual numbers.
-The flag states what moved and by how much — not what to do about it.
-
-![State 2 - Anomaly detected on Meta Ads](./state-2-anomaly.png)
+![State 1 - Cross-channel performance review](./images/state-1-normal.png)
 
 ---
 
-## State 3 — Partial data, channel stale
+## State 2 — Conversion anomaly detected
 
-One channel failed to fetch. The digest delivers what it has. The failed
-channel is marked explicitly — cross-channel totals show as incomplete rather
-than silently wrong. Retry time is visible inline.
+A significant shift in conversion efficiency is surfaced directly above the
+channel breakdown so the analyst sees the signal before reading detailed
+metrics. The interface explains what changed and by how much, without trying
+to prescribe actions automatically.
 
-![State 3 - Partial data, HubSpot stale](./state-3-partial.png)
+![State 2 - Conversion anomaly detected](./images/state-2-anomaly.png)
+
+---
+
+## State 3 — Delayed channel refresh
+
+One upstream source refreshed later than expected. The dashboard continues to
+serve the latest successful snapshot while exposing freshness state inline so
+analysts understand which numbers may be stale during review.
+
+![State 3 - Delayed channel refresh](./images/state-3-partial.png)
 
 ---
 
 ## UX decisions — documented
 
 **Summary bar comes first**
-The standing question is cross-channel. Three numbers answer it. Everything
-below supports those three numbers. The layout reflects the question, not the
-data structure.
+
+The standing question is cross-channel. Three summary metrics answer that first.
+Everything below supports those numbers. The layout reflects the operational
+question rather than the storage structure underneath.
+
+---
 
 **Anomaly strip appears above channel cards**
-If something needs attention, the analyst should see it before reading channel
-detail. The strip surfaces the signal before the noise.
 
-**Freshness indicators are inline, not in a footer**
-A footer timestamp is easy to ignore. Freshness sitting next to the channel
-name means the analyst sees data age at the same moment they read the number.
-They never mistake a stale number for a current one.
+If something requires attention, the analyst should see it before reading
+individual channel metrics. The signal appears before the detail.
 
-**Run log is visible in the main view**
-Making it visible at the bottom means any team member can answer "did the
-system run correctly today?" without needing a developer or an admin panel.
+---
 
-**Observations panel labelled "Rule-based · V1"**
-Sets accurate expectations. The analyst knows this is threshold logic, not AI
-interpretation. When V2 adds LLM narrative, the label changes. No confusion
-about what the system is doing or how much confidence to place in its output.
+**Freshness indicators are inline, not hidden in a footer**
 
-**Three states, not one**
-Most wireframes show the happy path. These three states cover normal operation,
-anomaly detection, and partial failure — because the tool needs to be trusted
-in all three situations, not just when everything works.
+Freshness is attached directly to the channel state so analysts see data age
+at the same moment they read the metric. This reduces the risk of treating
+stale numbers as current data.
+
+---
+
+**Run log stays visible in the main dashboard**
+
+The dashboard should answer “did the system run correctly today?” without
+requiring access to a separate admin panel or engineering tooling.
+
+---
+
+**Observations panel labelled “Rule-based · V1”**
+
+The label intentionally sets expectations. The observations shown here are
+threshold and rules-based summaries, not generated reasoning or autonomous
+analysis. Future iterations may introduce narrative generation separately.
+
+---
+
+**Three runtime states instead of one static mockup**
+
+Most wireframes only demonstrate the happy path. These states intentionally
+cover operational review, anomaly surfacing, and delayed upstream refreshes
+because the system needs to remain trustworthy even when data quality or
+delivery conditions are imperfect.
