@@ -1,0 +1,45 @@
+2026-05-28 13:41:41 | INFO     | pipeline     | ============================================================
+2026-05-28 13:41:41 | INFO     | pipeline     | Pipeline started — run_id: 6a5d4aba-1326-4b4f-9aca-b693fb4a58d7
+2026-05-28 13:41:41 | INFO     | pipeline     | ============================================================
+2026-05-28 13:41:41 | INFO     | pipeline     | Stage 1/4 — Fetching from Open-Meteo
+2026-05-28 13:41:41 | INFO     | pipeline.fetcher | Fetching — location: Mumbai, attempt: 1/3
+2026-05-28 13:41:42 | INFO     | pipeline.fetcher | Fetch success — location: Mumbai, days: 14
+2026-05-28 13:41:42 | INFO     | pipeline.fetcher | Fetching — location: Delhi, attempt: 1/3
+2026-05-28 13:41:42 | INFO     | pipeline.fetcher | Fetch success — location: Delhi, days: 14
+2026-05-28 13:41:42 | INFO     | pipeline.fetcher | Fetching — location: Bangalore, attempt: 1/3
+2026-05-28 13:41:42 | INFO     | pipeline.fetcher | Fetch success — location: Bangalore, days: 14
+2026-05-28 13:41:42 | INFO     | pipeline.fetcher | Fetching — location: Chennai, attempt: 1/3
+2026-05-28 13:41:42 | INFO     | pipeline.fetcher | Fetch success — location: Chennai, days: 14
+2026-05-28 13:41:42 | INFO     | pipeline.fetcher | Fetching — location: Kolkata, attempt: 1/3
+2026-05-28 13:41:43 | INFO     | pipeline.fetcher | Fetch success — location: Kolkata, days: 14
+2026-05-28 13:41:43 | INFO     | pipeline.fetcher | Fetch complete — success: 5, failed: 0
+2026-05-28 13:41:43 | INFO     | pipeline     | Stage 1 complete — locations: 5, duration: 1.69s
+2026-05-28 13:41:43 | INFO     | pipeline     | Stage 2/4 — Validating and transforming
+2026-05-28 13:41:43 | INFO     | pipeline.validator | Response validation passed — location: Mumbai, days: 14
+2026-05-28 13:41:43 | INFO     | pipeline.transformer | Transform complete — location: Mumbai, rows: 14, avg_risk_index: 0.380
+2026-05-28 13:41:43 | INFO     | pipeline.validator | DataFrame validation passed — location: Mumbai, rows: 14
+2026-05-28 13:41:43 | INFO     | pipeline.validator | Response validation passed — location: Delhi, days: 14
+2026-05-28 13:41:43 | INFO     | pipeline.transformer | Transform complete — location: Delhi, rows: 14, avg_risk_index: 0.392
+2026-05-28 13:41:43 | INFO     | pipeline.validator | DataFrame validation passed — location: Delhi, rows: 14
+2026-05-28 13:41:43 | INFO     | pipeline.validator | Response validation passed — location: Bangalore, days: 14
+2026-05-28 13:41:43 | INFO     | pipeline.transformer | Transform complete — location: Bangalore, rows: 14, avg_risk_index: 0.632
+2026-05-28 13:41:43 | INFO     | pipeline.validator | DataFrame validation passed — location: Bangalore, rows: 14
+2026-05-28 13:41:43 | INFO     | pipeline.validator | Response validation passed — location: Chennai, days: 14
+2026-05-28 13:41:43 | INFO     | pipeline.transformer | Transform complete — location: Chennai, rows: 14, avg_risk_index: 0.368
+2026-05-28 13:41:43 | INFO     | pipeline.validator | DataFrame validation passed — location: Chennai, rows: 14
+2026-05-28 13:41:43 | INFO     | pipeline.validator | Response validation passed — location: Kolkata, days: 14
+2026-05-28 13:41:43 | INFO     | pipeline.transformer | Transform complete — location: Kolkata, rows: 14, avg_risk_index: 0.442
+2026-05-28 13:41:43 | INFO     | pipeline.validator | DataFrame validation passed — location: Kolkata, rows: 14
+2026-05-28 13:41:43 | INFO     | pipeline     | Stage 2 complete — duration: 0.05s
+2026-05-28 13:41:43 | INFO     | pipeline     | Stage 3/4 — Combined rows: 70 | Bangalore: 14 | Chennai: 14 | Delhi: 14 | Kolkata: 14 | Mumbai: 14
+2026-05-28 13:41:43 | INFO     | pipeline     | Stage 3 complete — duration: 0.0s
+2026-05-28 13:41:43 | INFO     | pipeline     | Stage 4/4 — Loading to BigQuery
+2026-05-28 13:41:43 | WARNING  | google.auth._default | No project ID could be determined. Consider running `gcloud config set project` or setting the GOOGLE_CLOUD_PROJECT environment variable
+2026-05-28 13:41:45 | INFO     | pipeline.loader | Dataset exists — weather_marketing
+2026-05-28 13:41:45 | INFO     | pipeline.loader | Table exists — hospital-review-455006.weather_marketing.daily_weather
+2026-05-28 13:41:45 | INFO     | pipeline.loader | Starting BQ load — rows: 70, table: hospital-review-455006.weather_marketing.daily_weather
+2026-05-28 13:41:51 | INFO     | pipeline.loader | BQ load complete — rows: 70, job_id: f94519fe-4d8e-43fb-ae19-96a58a355d44
+2026-05-28 13:41:51 | INFO     | pipeline     | Stage 4 complete — duration: 8.22s
+2026-05-28 13:41:51 | INFO     | pipeline     | ============================================================
+2026-05-28 13:41:51 | INFO     | pipeline     | Pipeline complete — run_id: 6a5d4aba-1326-4b4f-9aca-b693fb4a58d7 | rows: 70 | bq_job: f94519fe-4d8e-43fb-ae19-96a58a355d44 | duration: 9.97s
+2026-05-28 13:41:51 | INFO     | pipeline     | ============================================================

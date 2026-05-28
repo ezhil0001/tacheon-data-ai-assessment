@@ -113,7 +113,7 @@ def transform(
         risk_idx = _calculate_risk_index(t_var, p_prob, w_spd)
 
         rows.append({
-            "fetch_date":          date,
+            "fetch_date":          pd.to_datetime(date).date(),
             "location":            location["name"],
             "country":             "India",
             "latitude":            location["lat"],
@@ -137,9 +137,9 @@ def transform(
     df = pd.DataFrame(rows)
 
     # Type enforcement in one pass
-    # fetch_date stored as string — BigQuery parses YYYY-MM-DD to DATE
-    # more reliably than pyarrow serializing datetime.date objects
-    df["fetch_date"]  = pd.to_datetime(df["fetch_date"]).dt.strftime("%Y-%m-%d")
+    # fetch_date kept as datetime64 for reliable
+    # pyarrow → BigQuery DATE serialization
+    df["fetch_date"] = pd.to_datetime(df["fetch_date"])
     df["ingested_at"] = pd.to_datetime(df["ingested_at"], utc=True)
 
     for col in [
