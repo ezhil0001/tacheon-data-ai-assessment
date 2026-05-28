@@ -22,6 +22,8 @@ understand when to push budget and when to pull it back.
 ---
 
 ## Pipeline structure
+
+```
 config/settings.py      — environment-driven configuration
 pipeline/fetcher.py     — API fetch with retry logic
 pipeline/validator.py   — response and dataframe validation
@@ -30,6 +32,7 @@ pipeline/loader.py      — BigQuery batch load
 run_pipeline.py         — entry point, wires all layers
 queries/                — analytical SQL queries
 tests/                  — unit tests, no external dependencies
+```
 
 Each layer has one responsibility. The fetcher doesn't know about BigQuery.
 The loader doesn't know about the API. The entry point wires them in sequence.
@@ -38,7 +41,7 @@ The loader doesn't know about the API. The entry point wires them in sequence.
 
 ## What the pipeline produces
 
-One row per city per day. Five cities, eight days back, 40 rows per run.
+One row per city per day. Total rows depend on the configured fetch window.
 
 The key derived field is `campaign_risk_index` — a composite score between
 0 and 1 built from temperature variance, precipitation probability, and wind
@@ -119,11 +122,13 @@ python run_pipeline.py
 
 Expected output:
 
+```
 2026-05-26 08:14:01 | INFO | pipeline | Pipeline started — run_id: a3f8c2d1-...
 2026-05-26 08:14:06 | INFO | pipeline | Stage 1 complete — duration: 5.2s
-2026-05-26 08:14:07 | INFO | pipeline | Combined rows: 40 | Mumbai: 8 | Delhi: 8 | Bangalore: 8 | Chennai: 8 | Kolkata: 8
-2026-05-26 08:14:09 | INFO | loader   | BQ load complete — rows: 40, job_id: abc123
-2026-05-26 08:14:09 | INFO | pipeline | Pipeline complete — rows: 40 | duration: 8.1s
+2026-05-26 08:14:07 | INFO | pipeline | Combined rows: 70 | Mumbai: 14 | Delhi: 14 | Bangalore: 14 | Chennai: 14 | Kolkata: 14
+2026-05-26 08:14:09 | INFO | loader   | BQ load complete — rows: 70, job_id: abc123
+2026-05-26 08:14:09 | INFO | pipeline | Pipeline complete — rows: 70 | duration: 8.1s
+```
 
 If it fails, exit code is 1 and the full error is in `logs/pipeline.log`.
 
@@ -198,4 +203,3 @@ cares more about temperature than a food delivery platform does.
 Dead letter handling is missing. If a payload passes response validation but
 fails DataFrame validation, that raw response is lost. Writing failed payloads
 to a staging location would allow reprocessing without re-fetching.
-
