@@ -7,7 +7,7 @@ load_dotenv()
 
 def _require(key: str) -> str:
     value = os.getenv(key)
-    if not value or value == "your-gcp-project-id":
+    if not value:
         raise EnvironmentError(
             f"Required environment variable '{key}' is not set. "
             f"Copy .env.example to .env and fill in the value."
