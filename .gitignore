@@ -20,7 +20,7 @@ service-account*.json
 gcp-key*.json
 
 # Logs — runtime files, not source
-logs/*.log
+logs/
 
 # OS
 .DS_Store
